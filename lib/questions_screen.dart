@@ -1,13 +1,16 @@
 import 'package:adv_basics/data/questions.dart';
 import 'package:flutter/material.dart';
 
-import 'package:adv_basics/models/answer_button.dart';
+import 'package:adv_basics/answer_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // 定義一個 StatefulWidget（可在生命週期內改變狀態）
 class QuestionsScreen extends StatefulWidget {
   // 使用 const 關鍵字來創建一個不可變的 widget
-  const QuestionsScreen({super.key, required this.onSelectAnswer});
+  const QuestionsScreen({
+    super.key,
+    required this.onSelectAnswer,
+  });
 
   final void Function(String answer) onSelectAnswer;
 
@@ -18,18 +21,20 @@ class QuestionsScreen extends StatefulWidget {
   }
 }
 
-// 定義 _QuestionsScreenState 類，這個類保存了 QuestionsScreen widget 的狀態
+// 定義 _QuestionsScreenState class，保存了 QuestionsScreen widget 的狀態
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  // 覆寫 build 方法來描述這個 widget 的 UI
-
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    // 調用 widget 的 onSelectAnswer 方法，並傳入選擇的答案
+    widget.onSelectAnswer(selectedAnswer);
+
     setState(() {
       currentQuestionIndex++;
     });
   }
 
+// 覆寫 build 方法來描述這個 widget 的 UI
   @override
   Widget build(context) {
     final currentQuestion = questions[currentQuestionIndex];
@@ -57,7 +62,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             ...currentQuestion.getShuffledAnswers().map((answer) {
               return AnswerButton(
                 answerText: answer,
-                onPress: answerQuestion,
+                onPress: () {
+                  answerQuestion(answer);
+                },
               );
             }),
           ],
