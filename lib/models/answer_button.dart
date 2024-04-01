@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AnswerButton extends StatelessWidget {
   // 非命名參數：使用時要按照順序指定參數值
@@ -24,12 +25,18 @@ class AnswerButton extends StatelessWidget {
           horizontal: 40,
         ),
         backgroundColor: const Color.fromARGB(255, 37, 17, 92),
-        foregroundColor: Colors.white, // 字體顏色
+        foregroundColor: Colors.white, // 字體顏色（會被下面的child中的style蓋過）
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(40),
         ),
       ),
-      child: Text(answerText),
+      child: Text(
+        answerText,
+        textAlign: TextAlign.center,
+        style: GoogleFonts.labrada(
+            color: const Color.fromARGB(255, 238, 220, 255),
+            fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

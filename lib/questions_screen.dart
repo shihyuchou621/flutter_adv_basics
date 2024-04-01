@@ -2,11 +2,14 @@ import 'package:adv_basics/data/questions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:adv_basics/models/answer_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // 定義一個 StatefulWidget（可在生命週期內改變狀態）
 class QuestionsScreen extends StatefulWidget {
   // 使用 const 關鍵字來創建一個不可變的 widget
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
+
+  final void Function(String answer) onSelectAnswer;
 
   // 覆寫 createState 方法來創建這個 widget 的狀態並返回一個新的 _QuestionsScreenState 實例
   @override
@@ -43,8 +46,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           children: [
             Text(
               currentQuestion.text,
-              style: const TextStyle(
-                color: Colors.white,
+              style: GoogleFonts.labrada(
+                color: const Color.fromARGB(255, 238, 220, 255),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),

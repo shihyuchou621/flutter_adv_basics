@@ -6,32 +6,40 @@ class Quiz extends StatefulWidget {
   const Quiz({super.key});
 
   @override
+  // createState 方法返回一個 State 物件，這個物件包含了 Quiz 的狀態
   State<Quiz> createState() {
     return _QuizState();
   }
 }
 
+// _QuizState 類別包含了 Quiz 的狀態
 class _QuizState extends State<Quiz> {
+  final List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
 
-  switchScreen() {
+  void switchScreen() {
     setState(() {
       activeScreen = 'questions-screen';
     });
   }
 
-  @override
-  Widget build(context) {
-    // final screenWidget = activeScreen == 'start-screen'
-    //     ? StartScreen(switchScreen)
-    //     : const QuestionsScreen();
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+  }
 
+  @override
+  // build 方法返回一個 Widget，這個 Widget 描述了 UI 應該如何顯示
+  Widget build(context) {
+    // 根據 activeScreen 的值，選擇要顯示的 Widget
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionsScreen();
+      screenWidget = QuestionsScreen(
+        onSelectAnswer: chooseAnswer,
+      );
     }
 
+    // MaterialApp 是一個應用程式的根 Widget，它包含了一些共享的設定，如主題
     return MaterialApp(
       home: Scaffold(
         body: Container(
