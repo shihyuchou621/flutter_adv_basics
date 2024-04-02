@@ -33,7 +33,7 @@ class AnswerButton extends StatelessWidget {
       child: Text(
         answerText,
         textAlign: TextAlign.center,
-        style: GoogleFonts.labrada(
+        style: GoogleFonts.lato(
             color: const Color.fromARGB(255, 238, 220, 255),
             fontWeight: FontWeight.bold),
       ),
