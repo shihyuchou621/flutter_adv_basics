@@ -1,4 +1,4 @@
-import 'package:adv_basics/question_summary/question_identifier.dart';
+import 'package:adv_basics/questions_summary/question_identifier.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
