@@ -15,8 +15,10 @@ class Quiz extends StatefulWidget {
 }
 
 // _QuizState 類別包含了 Quiz 的狀態
+// 前方加底線表示這個類別是私有的，只能在這個檔案中使用
+// 其他參數也可這樣命名，比方說下方的__selectedAnswers，加上底線其他檔案就無法使用
 class _QuizState extends State<Quiz> {
-  List<String> selectedAnswers = [];
+  List<String> _selectedAnswers = [];
   var activeScreen = 'start-screen';
 
   void switchScreen() {
@@ -25,11 +27,11 @@ class _QuizState extends State<Quiz> {
     });
   }
 
-// 將選擇的答案添加到列表 selectedAnswers 中
+// 將選擇的答案添加到列表 _selectedAnswers 中
   void chooseAnswer(String answer) {
-    selectedAnswers.add(answer);
+    _selectedAnswers.add(answer);
 
-    if (selectedAnswers.length == questions.length) {
+    if (_selectedAnswers.length == questions.length) {
       setState(() {
         activeScreen = 'results-screen';
       });
@@ -38,7 +40,7 @@ class _QuizState extends State<Quiz> {
 
   void restartQuiz() {
     setState(() {
-      selectedAnswers = [];
+      _selectedAnswers = [];
       activeScreen = 'questions-screen';
     });
   }
@@ -57,7 +59,7 @@ class _QuizState extends State<Quiz> {
 
     if (activeScreen == 'results-screen') {
       screenWidget = ResultsScreen(
-        chosenAnswers: selectedAnswers,
+        chosenAnswers: _selectedAnswers,
         onRestart: restartQuiz,
       );
     }

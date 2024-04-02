@@ -26,6 +26,7 @@ class AnswerButton extends StatelessWidget {
         ),
         backgroundColor: const Color.fromARGB(255, 37, 17, 92),
         foregroundColor: Colors.white, // 字體顏色（會被下面的child中的style蓋過）
+        // 讓按鈕變成圓角
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40),
         ),

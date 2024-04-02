@@ -27,13 +27,32 @@ class ResultsScreen extends StatelessWidget {
     return summary;
   }
 
+  // getter：直接定義summaryData
+  // 外部使用此getter時，也一樣不需再加括號，直接使用summaryData即可
+
+  //   List<Map<String, Object>> get summaryData {
+  //   final List<Map<String, Object>> summary = [];
+
+  //   for (var i = 0; i < chosenAnswers.length; i++) {
+  //     summary.add({
+  //       'question_index': i,
+  //       'question': questions[i].text,
+  //       'correct_answer': questions[i].answers[0],
+  //       'user_answer': chosenAnswers[i],
+  //     });
+  //   }
+  //   return summary;
+  // }
+
   @override
   Widget build(BuildContext context) {
-    final summaryData = getSummaryData();
+    final summaryData = getSummaryData(); // 使用getter的話就不需這行，直接使用summaryData即可
     final numTotalQuestions = questions.length;
-    final numCorrectQuestions = summaryData.where((data) {
-      return data['correct_answer'] == data['user_answer'];
-    }).length;
+    final numCorrectQuestions = summaryData
+        .where(
+          (data) => data['correct_answer'] == data['user_answer'],
+        )
+        .length;
 
     return SizedBox(
       width: double.infinity, // 使 widget 的寬度盡可能大
